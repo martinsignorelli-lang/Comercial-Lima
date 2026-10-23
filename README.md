@@ -1,14 +1,16 @@
 # Comercial Lima · Catálogo digital
 
-Catálogo web de productos de higiene institucional de Comercial Lima. El cliente busca y filtra productos, arma su pedido y lo envía por WhatsApp (+54 387 468 1380) para pedir presupuesto. No muestra precios.
+Catálogo web de productos de higiene institucional de Comercial Lima. El cliente busca y filtra productos, arma su pedido y lo envía por WhatsApp (+54 387 468 1380) para pedir presupuesto. Los precios están desactivados por defecto (`MOSTRAR_PRECIOS` en `data/productos.js`).
 
 ## Qué hace
 
 - Búsqueda por nombre, marca o descripción (sin importar tildes).
 - Filtros por categoría, sector (hotelería, gastronomía, salud…) y marca.
-- Ficha de cada producto con presentaciones y sectores.
+- Ficha de cada producto con código, características, presentaciones, sectores y botón a la ficha técnica en PDF.
+- **Link por rubro** con encabezado propio: `?sector=hoteleria`, `?sector=gastronomia`, `?sector=salud`, `?sector=lavanderia`, `?sector=industria`, `?sector=oficinas`. Botón "Compartir link" para mandarlo por WhatsApp.
+- **Combina con**: en cada producto, los relacionados (dispensador → repuesto) con botón para sumarlos al pedido.
 - Pedido con cantidades; se guarda en el navegador aunque se cierre la página.
-- Botón "Pedir presupuesto por WhatsApp" que arma el mensaje con la lista.
+- Botón "Pedir presupuesto por WhatsApp" que arma el mensaje con la lista, el código de PowerProcess y el rubro.
 - Se adapta a celular y se puede imprimir o guardar como PDF (Ctrl + P).
 
 ## Cómo verlo
@@ -28,7 +30,12 @@ Todo está en **`data/productos.js`**. Cada producto es un bloque así:
   sectores: ["hoteleria", "salud"],   // ids de la lista SECTORES
   descripcion: "Texto corto.",
   presentaciones: ["Caja"],           // opcional
-  imagen: "img/toalla-interfoliada.jpg" // opcional; sin foto se muestra el trébol Lima
+  imagen: "img/toalla-interfoliada.jpg", // opcional; sin foto se muestra el trébol Lima
+  codigo: "12345",                      // opcional; código en PowerProcess
+  caracteristicas: ["Doble hoja", "Para dispensador H2"], // opcional
+  ficha: "fichas/toalla-interfoliada.pdf", // opcional; PDF en la carpeta fichas/
+  relacionados: ["dispensador-toallas"],   // opcional; ids que combinan
+  precio: 12500                          // opcional; solo si MOSTRAR_PRECIOS = true
 }
 ```
 
@@ -49,3 +56,4 @@ Con GitHub Pages: en el repositorio, **Settings → Pages → Source: Deploy fro
 | `app.js` | Búsqueda, filtros, pedido y WhatsApp |
 | `data/productos.js` | Productos, categorías y sectores |
 | `img/` | Fotos de productos |
+| `fichas/` | Fichas técnicas en PDF |

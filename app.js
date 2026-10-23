@@ -13,7 +13,13 @@
   var porId = {};
   productos.forEach(function (p) { porId[p.id] = p; });
 
+  var MOSTRAR_PRECIOS = !!window.MOSTRAR_PRECIOS;
+  var sectorPorId = {};
+  sectores.forEach(function (s) { sectorPorId[s.id] = s; });
+
   var filtro = { texto: "", categoria: "", sector: "", marca: "" };
+  var params = new URLSearchParams(location.search);
+  if (sectorPorId[params.get("sector")]) filtro.sector = params.get("sector");
   // Cada línea del pedido: { id, presentacion, cantidad }
   var pedido = cargarPedido();
 
@@ -32,6 +38,40 @@
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
+  }
+
+  function precio(p) {
+    if (!MOSTRAR_PRECIOS || typeof p.precio !== "number") return "";
+    return '<span class="precio">$ ' + p.precio.toLocaleString("es-AR") + ' <small>+ IVA</small></span>';
+  }
+
+  // ---------- Segmento (link por sector) ----------
+
+  var HERO = null;
+  function aplicarSector() {
+    var h1 = document.querySelector(".hero h1"), sub = document.querySelector(".hero-sub"), eb = document.querySelector(".eyebrow");
+    if (!HERO) HERO = { h1: h1.textContent, sub: sub.textContent, eb: eb.textContent };
+    var s = sectorPorId[filtro.sector];
+    h1.textContent = s && s.titulo ? s.titulo : HERO.h1;
+    sub.textContent = s && s.bajada ? s.bajada : HERO.sub;
+    eb.textContent = s ? "Catálogo · " + s.nombre : HERO.eb;
+    $("sector").value = filtro.sector;
+    var url = location.pathname + (filtro.sector ? "?sector=" + filtro.sector : "");
+    try { history.replaceState(null, "", url); } catch (e) { /* sin historial */ }
+    document.title = (s ? s.nombre + " · " : "Catálogo · ") + "Comercial Lima";
+  }
+
+  function compartir() {
+    var s = sectorPorId[filtro.sector];
+    var url = location.origin + location.pathname + (filtro.sector ? "?sector=" + filtro.sector : "");
+    var titulo = s ? "Catálogo " + s.nombre + " · Comercial Lima" : "Catálogo · Comercial Lima";
+    if (navigator.share) {
+      navigator.share({ title: titulo, url: url }).catch(function () {});
+      return;
+    }
+    var hecho = function () { avisar("Link copiado: " + url); };
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(hecho, function () { prompt("Copiá el link:", url); });
+    else prompt("Copiá el link:", url);
   }
 
   function normalizar(s) {
@@ -71,7 +111,7 @@
     if (filtro.sector && (p.sectores || []).indexOf(filtro.sector) === -1) return false;
     if (filtro.marca && p.marca !== filtro.marca) return false;
     if (filtro.texto) {
-      var texto = normalizar([p.nombre, p.marca, p.descripcion, nombreCategoria[p.categoria]].join(" "));
+      var texto = normalizar([p.nombre, p.marca, p.codigo, p.descripcion, nombreCategoria[p.categoria]].concat(p.caracteristicas || []).join(" "));
       return normalizar(filtro.texto).split(/\s+/).every(function (t) { return texto.indexOf(t) !== -1; });
     }
     return true;
@@ -95,6 +135,7 @@
         '<span class="card-marca">' + esc(p.marca) + "</span>" +
         '<h3><button type="button" data-ver="' + esc(p.id) + '">' + esc(p.nombre) + "</button></h3>" +
         "<p>" + esc(p.descripcion) + "</p>" +
+        precio(p) +
         '<div class="card-acciones"><button class="btn-agregar' + (cant ? " en-pedido" : "") + '" type="button" data-agregar="' + esc(p.id) + '">' +
         (cant ? "✓ En el pedido (" + cant + ")" : "Agregar al pedido") + "</button></div>" +
         "</div></article>";
@@ -107,12 +148,22 @@
     var p = porId[id];
     if (!p) return;
     var pres = p.presentaciones || [];
+    var carac = p.caracteristicas || [];
+    var rel = (p.relacionados || []).map(function (id) { return porId[id]; }).filter(Boolean);
     $("detalleBody").innerHTML =
       '<div class="modal-img">' + imagen(p) + "</div>" +
       '<div class="modal-info">' +
       '<span class="card-marca">' + esc(p.marca) + "</span>" +
       '<h2 id="detalleNombre">' + esc(p.nombre) + "</h2>" +
+      (p.codigo ? '<span class="codigo">Código ' + esc(p.codigo) + "</span>" : "") +
       "<p>" + esc(p.descripcion) + "</p>" +
+      precio(p) +
+      (carac.length ? '<h4>Características</h4><ul class="caracteristicas">' + carac.map(function (c) {
+        return "<li>" + esc(c) + "</li>";
+      }).join("") + "</ul>" : "") +
+      (p.ficha ? '<a class="btn-ficha" href="' + esc(p.ficha) + '" target="_blank" rel="noopener">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 12v6m-3-3 3 3 3-3"/></svg>' +
+        "Ficha técnica (PDF)</a>" : "") +
       '<h4>Categoría</h4><div class="etiquetas"><span class="etiqueta">' + esc(nombreCategoria[p.categoria] || "") + "</span></div>" +
       ((p.sectores || []).length ? '<h4>Ideal para</h4><div class="etiquetas">' + p.sectores.map(function (s) {
         return '<span class="etiqueta">' + esc(nombreSector[s] || s) + "</span>";
@@ -125,7 +176,14 @@
       '<input id="detalleCant" type="number" min="1" value="1" inputmode="numeric" aria-label="Cantidad">' +
       '<button type="button" data-mas aria-label="Más">+</button></div>' +
       '<button class="btn-agregar" type="button" data-agregar-detalle="' + esc(p.id) + '">Agregar al pedido</button>' +
-      "</div></div>";
+      "</div>" +
+      (rel.length ? '<div class="combina"><h4>Combina con</h4>' + rel.map(function (r) {
+        var en = cantidadEnPedido(r.id);
+        return '<div class="combina-item"><button class="combina-img" type="button" data-ver-rel="' + esc(r.id) + '" aria-label="Ver ' + esc(r.nombre) + '">' + imagen(r) + "</button>" +
+          '<button class="combina-nombre" type="button" data-ver-rel="' + esc(r.id) + '"><b>' + esc(r.nombre) + "</b><span>" + esc(r.marca) + "</span></button>" +
+          '<button class="combina-add' + (en ? " en-pedido" : "") + '" type="button" data-agregar-rel="' + esc(r.id) + '" aria-label="Agregar ' + esc(r.nombre) + '">' + (en ? "✓" : "+") + "</button></div>";
+      }).join("") + "</div>" : "") +
+      "</div>";
     $("detalle").showModal();
   }
 
@@ -203,9 +261,10 @@
     pedido.forEach(function (l) {
       var p = porId[l.id];
       var detalle = [p.marca, l.presentacion].filter(Boolean).join(" · ");
-      lineas.push("• " + l.cantidad + " × " + p.nombre + (detalle ? " (" + detalle + ")" : ""));
+      lineas.push("• " + l.cantidad + " × " + (p.codigo ? "[" + p.codigo + "] " : "") + p.nombre + (detalle ? " (" + detalle + ")" : ""));
     });
-    if (cliente) lineas.push("", "Nombre / empresa: " + cliente);
+    if (sectorPorId[filtro.sector]) lineas.push("", "Rubro: " + sectorPorId[filtro.sector].nombre);
+    if (cliente) lineas.push((sectorPorId[filtro.sector] ? "" : "\n") + "Nombre / empresa: " + cliente);
     if (comentario) lineas.push("Comentarios: " + comentario);
     return lineas.join("\n");
   }
@@ -226,7 +285,8 @@
     clearTimeout(demora);
     demora = setTimeout(function () { filtro.texto = e.target.value.trim(); render(); }, 120);
   });
-  $("sector").addEventListener("change", function (e) { filtro.sector = e.target.value; render(); });
+  $("sector").addEventListener("change", function (e) { filtro.sector = e.target.value; aplicarSector(); render(); });
+  $("compartir").addEventListener("click", compartir);
   $("marca").addEventListener("change", function (e) { filtro.marca = e.target.value; render(); });
   $("categorias").addEventListener("click", function (e) {
     var chip = e.target.closest("[data-cat]");
@@ -249,6 +309,15 @@
     var cant = $("detalleCant");
     if (e.target.closest("[data-mas]")) cant.value = (parseInt(cant.value, 10) || 0) + 1;
     if (e.target.closest("[data-menos]")) cant.value = Math.max(1, (parseInt(cant.value, 10) || 2) - 1);
+    var verRel = e.target.closest("[data-ver-rel]");
+    if (verRel) { detalle.close(); return verDetalle(verRel.dataset.verRel); }
+    var addRel = e.target.closest("[data-agregar-rel]");
+    if (addRel) {
+      agregar(addRel.dataset.agregarRel, undefined, 1);
+      addRel.classList.add("en-pedido");
+      addRel.textContent = "✓";
+      return;
+    }
     var add = e.target.closest("[data-agregar-detalle]");
     if (add) {
       var pres = detalle.querySelector('input[name="pres"]:checked');
@@ -294,5 +363,6 @@
   });
 
   armarFiltros();
+  aplicarSector();
   actualizar();
 })();

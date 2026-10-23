@@ -5,6 +5,11 @@
 // - sectores: uno o más "id" de SECTORES.
 // - imagen: ruta a la foto dentro de la carpeta img/ (opcional).
 // - presentaciones: formatos disponibles (opcional).
+// - codigo: código del producto en PowerProcess (opcional, viaja en el pedido de WhatsApp).
+// - caracteristicas: lista de puntos clave (opcional).
+// - ficha: ruta o link al PDF de la ficha técnica, ej. "fichas/toalla-h2.pdf" (opcional).
+// - relacionados: ids de productos que combinan con este (opcional). Ej.: dispensador -> repuesto.
+// - precio: número sin signos, ej. 12500 (opcional; solo se muestra si MOSTRAR_PRECIOS = true).
 // IMPORTANTE: los productos de abajo son ejemplos. Reemplazalos por los reales.
 
 window.CATEGORIAS = [
@@ -18,13 +23,30 @@ window.CATEGORIAS = [
   { id: "descartables", nombre: "Descartables" }
 ];
 
+// Precios: dejar en false mientras la página sea pública.
+window.MOSTRAR_PRECIOS = false;
+
+// Cada sector tiene su link propio: .../?sector=hoteleria
+// "titulo" y "bajada" reemplazan el encabezado cuando se abre ese link.
 window.SECTORES = [
-  { id: "hoteleria", nombre: "Hotelería" },
-  { id: "gastronomia", nombre: "Gastronomía" },
-  { id: "salud", nombre: "Salud" },
-  { id: "lavanderia", nombre: "Lavandería" },
-  { id: "industria", nombre: "Industria" },
-  { id: "oficinas", nombre: "Oficinas y empresas" }
+  { id: "hoteleria", nombre: "Hotelería",
+    titulo: "Soluciones de higiene para hoteles",
+    bajada: "Habitaciones, baños, lavandería y áreas comunes: todo lo que tu hotel necesita, de un solo proveedor en Salta." },
+  { id: "gastronomia", nombre: "Gastronomía",
+    titulo: "Higiene para cocinas y restaurantes",
+    bajada: "Papeles, paños, químicos y descartables para cocina, salón y baños." },
+  { id: "salud", nombre: "Salud",
+    titulo: "Higiene para clínicas y centros de salud",
+    bajada: "Productos para control de infecciones, higiene de manos y limpieza de superficies." },
+  { id: "lavanderia", nombre: "Lavandería",
+    titulo: "Productos para lavanderías",
+    bajada: "Químicos y dosificación para lavado institucional." },
+  { id: "industria", nombre: "Industria",
+    titulo: "Higiene para industria y minería",
+    bajada: "Paños, papeles y productos de limpieza para planta, taller y comedor." },
+  { id: "oficinas", nombre: "Oficinas y empresas",
+    titulo: "Higiene para oficinas y empresas",
+    bajada: "Baños y espacios comunes siempre equipados." }
 ];
 
 window.PRODUCTOS = [
@@ -36,7 +58,8 @@ window.PRODUCTOS = [
     sectores: ["hoteleria", "gastronomia", "salud", "oficinas", "industria"],
     descripcion: "Papel higiénico para baños de alto tránsito.",
     presentaciones: ["Rollo tradicional", "Rollo grande"],
-    imagen: ""
+    imagen: "",
+    relacionados: ["dispensador-higienico"]
   },
   {
     id: "toalla-interfoliada",
@@ -46,7 +69,8 @@ window.PRODUCTOS = [
     sectores: ["hoteleria", "gastronomia", "salud", "oficinas"],
     descripcion: "Toallas de papel que salen de a una para un secado higiénico.",
     presentaciones: ["Caja"],
-    imagen: ""
+    imagen: "",
+    relacionados: ["dispensador-toallas", "jabon-liquido-manos"]
   },
   {
     id: "toalla-rollo",
@@ -76,7 +100,8 @@ window.PRODUCTOS = [
     sectores: ["hoteleria", "gastronomia", "salud", "oficinas", "industria"],
     descripcion: "Dispensador de pared para toallas de mano.",
     presentaciones: ["Blanco", "Negro"],
-    imagen: ""
+    imagen: "",
+    relacionados: ["toalla-interfoliada", "toalla-rollo"]
   },
   {
     id: "dispensador-higienico",
@@ -86,7 +111,8 @@ window.PRODUCTOS = [
     sectores: ["hoteleria", "gastronomia", "salud", "oficinas", "industria"],
     descripcion: "Dispensador de pared para papel higiénico.",
     presentaciones: ["Blanco", "Negro"],
-    imagen: ""
+    imagen: "",
+    relacionados: ["papel-higienico-rollo"]
   },
   {
     id: "dispensador-jabon",
@@ -96,7 +122,8 @@ window.PRODUCTOS = [
     sectores: ["hoteleria", "gastronomia", "salud", "oficinas", "industria"],
     descripcion: "Dispensador de pared para jabón líquido o en espuma.",
     presentaciones: [],
-    imagen: ""
+    imagen: "",
+    relacionados: ["jabon-liquido-manos", "alcohol-gel"]
   },
   {
     id: "panos-wypall",
@@ -116,7 +143,8 @@ window.PRODUCTOS = [
     sectores: ["hoteleria", "gastronomia", "salud", "oficinas", "industria"],
     descripcion: "Jabón líquido para recargar dispensadores.",
     presentaciones: ["Bidón", "Cartucho"],
-    imagen: ""
+    imagen: "",
+    relacionados: ["dispensador-jabon"]
   },
   {
     id: "alcohol-gel",
@@ -136,7 +164,8 @@ window.PRODUCTOS = [
     sectores: ["hoteleria"],
     descripcion: "Amenity de línea propia, personalizable con la marca del hotel.",
     presentaciones: ["Sachet", "Frasco", "Bidón"],
-    imagen: ""
+    imagen: "",
+    relacionados: ["acondicionador-good-cream", "jabon-tocador-good-cream"]
   },
   {
     id: "acondicionador-good-cream",
@@ -146,7 +175,8 @@ window.PRODUCTOS = [
     sectores: ["hoteleria"],
     descripcion: "Amenity de línea propia, personalizable con la marca del hotel.",
     presentaciones: ["Sachet", "Frasco", "Bidón"],
-    imagen: ""
+    imagen: "",
+    relacionados: ["shampoo-good-cream", "jabon-tocador-good-cream"]
   },
   {
     id: "jabon-tocador-good-cream",
@@ -156,7 +186,8 @@ window.PRODUCTOS = [
     sectores: ["hoteleria"],
     descripcion: "Jabón individual para habitaciones de hotel.",
     presentaciones: [],
-    imagen: ""
+    imagen: "",
+    relacionados: ["shampoo-good-cream", "acondicionador-good-cream"]
   },
   {
     id: "detergente",
@@ -186,7 +217,8 @@ window.PRODUCTOS = [
     sectores: ["lavanderia", "hoteleria", "salud"],
     descripcion: "Detergente para lavado de ropa blanca y mantelería.",
     presentaciones: ["Bidón"],
-    imagen: ""
+    imagen: "",
+    relacionados: ["desinfectante"]
   },
   {
     id: "bolsas-residuos",
