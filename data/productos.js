@@ -10,12 +10,13 @@
 // - ficha: ruta o link al PDF de la ficha técnica, ej. "fichas/toalla-h2.pdf" (opcional).
 // - relacionados: ids de productos que combinan con este (opcional). Ej.: dispensador -> repuesto.
 // - precio: número sin signos, ej. 12500 (opcional; solo se muestra si MOSTRAR_PRECIOS = true).
-// IMPORTANTE: la línea Good Cream es real. El resto de los productos son ejemplos: reemplazalos por los reales.
+// IMPORTANTE: las líneas Good Cream y Cahesa son reales. El resto de los productos son ejemplos: reemplazalos por los reales.
 
 window.CATEGORIAS = [
   { id: "papeles", nombre: "Papeles" },
   { id: "dispensadores", nombre: "Dispensadores" },
   { id: "panos", nombre: "Paños industriales" },
+  { id: "lavanderia", nombre: "Lavandería" },
   { id: "limpieza", nombre: "Limpieza y químicos" },
   { id: "amenities", nombre: "Amenities hoteleros" },
   { id: "manos", nombre: "Cuidado de manos" },
@@ -50,6 +51,399 @@ window.SECTORES = [
 ];
 
 window.PRODUCTOS = [
+  // ===== Cahesa · lavandería profesional y hotelería (cahesa.com) =====
+  {
+    id: "ch-politex-100",
+    nombre: "Politex 100 · detergente neutro",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Detergente líquido neutro concentrado para lavado profesional de todo tipo de fibras.",
+    caracteristicas: ["Multisurfactante, pH neutro", "Apto para todo tipo de fibra", "Eficaz en aguas duras", "Para dosificación automática"],
+    presentaciones: ["Bidón 20 L", "Tambor 200 L"],
+    imagen: "https://cahesa.com/uploads/1561077319679853.jpg",
+    ficha: "https://cahesa.com/uploads/1802294596376522.pdf",
+    relacionados: ["ch-politex-200", "ch-politex-300", "ch-politex-blanox"]
+  },
+  {
+    id: "ch-politex-110",
+    nombre: "Politex 110 · detergente con blanqueador óptico",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Detergente sintético líquido de uso profesional, sin fosfatos, con blanqueador óptico para ropa blanca.",
+    caracteristicas: ["Sin fosfatos", "Con blanqueador óptico", "Uso profesional"],
+    presentaciones: ["Bidón 20 L", "Tambor 200 L", "Contenedor 1000 L"],
+    imagen: "https://cahesa.com/uploads/1801690397829836.jpg",
+    ficha: "https://cahesa.com/uploads/1801690397829950.pdf",
+    relacionados: ["ch-politex-300", "ch-politex-blanc-plus", "ch-politex-extra-soft"]
+  },
+  {
+    id: "ch-politex-200",
+    nombre: "Politex 200 · potenciador alcalino",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Aditivo alcalino líquido que potencia el desengrase cuando se usa junto con Politex 100.",
+    caracteristicas: ["Refuerza la remoción de grasas", "Se combina con Politex 100"],
+    presentaciones: ["Bidón 20 L", "Tambor 200 L"],
+    imagen: "https://cahesa.com/uploads/1561077368515435.jpg",
+    ficha: "https://cahesa.com/uploads/1802294537840065.pdf",
+    relacionados: ["ch-politex-100", "ch-politex-300"]
+  },
+  {
+    id: "ch-politex-300",
+    nombre: "Politex 300 · neutralizante",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Neutraliza los restos alcalinos del lavado en el último enjuague y actúa como blanqueador.",
+    caracteristicas: ["Neutraliza restos alcalinos", "Acción blanqueadora", "Último enjuague"],
+    presentaciones: ["Bidón 20 L", "Tambor 200 L"],
+    imagen: "https://cahesa.com/uploads/1561077664284807.jpg",
+    ficha: "https://cahesa.com/uploads/1572103934792405.pdf",
+    relacionados: ["ch-politex-100", "ch-politex-extra-soft"]
+  },
+  {
+    id: "ch-politex-blanc-plus",
+    nombre: "Politex Blanc Plus · blanqueador clorado",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Blanqueador líquido clorado concentrado: blanquea, desinfecta y decolora.",
+    caracteristicas: ["Base cloro, concentrado", "Blanquea y desinfecta"],
+    presentaciones: ["Bidón 20 L", "Tambor 200 L"],
+    imagen: "https://cahesa.com/uploads/1561077463268937.jpg",
+    relacionados: ["ch-politex-110", "ch-politex-300"]
+  },
+  {
+    id: "ch-politex-blancper",
+    nombre: "Politex Blancper · blanqueador peracético",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Blanqueador a base de ácido peracético para textiles de algodón y algodón-poliéster.",
+    caracteristicas: ["Base ácido peracético", "Para algodón y algodón-poliéster"],
+    presentaciones: [],
+    imagen: "https://cahesa.com/uploads/1801754063193728.jpg",
+    relacionados: ["ch-politex-100", "ch-politex-300"]
+  },
+  {
+    id: "ch-politex-blanox",
+    nombre: "Politex Blanox · blanqueador oxigenado",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Blanqueador líquido oxigenado para lavanderías hospitalarias y hoteleras. No reacciona con la clorhexidina, por lo que evita esas manchas.",
+    caracteristicas: ["Base oxígeno, sin cloro", "No reacciona con clorhexidina", "Uso hospitalario y hotelero"],
+    presentaciones: ["Bidón 20 L"],
+    imagen: "https://cahesa.com/uploads/1561077607087456.jpg",
+    ficha: "https://cahesa.com/uploads/1572103726940461.pdf",
+    relacionados: ["ch-politex-100", "ch-politex-300"]
+  },
+  {
+    id: "ch-politex-extra-soft",
+    nombre: "Politex Extra Soft · suavizante",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Suavizante textil profesional con antiestáticos y perfume.",
+    caracteristicas: ["Con antiestáticos", "Perfumado", "Último enjuague"],
+    presentaciones: ["Bidón 20 L"],
+    imagen: "https://cahesa.com/uploads/1571903222371432.jpg",
+    ficha: "https://cahesa.com/uploads/1572104049447601.pdf",
+    relacionados: ["ch-politex-300", "ch-perfumina-soft"]
+  },
+  {
+    id: "ch-extra-2000",
+    nombre: "Detergente Extra 2000 · polvo",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Detergente en polvo para prendas con suciedad leve, con buena relación precio-calidad.",
+    caracteristicas: ["Para suciedad leve", "Rendidor y económico"],
+    presentaciones: ["Bolsa 25 kg"],
+    imagen: "https://cahesa.com/uploads/1561706615992753.jpg",
+    ficha: "https://cahesa.com/uploads/1572355435703396.pdf",
+    relacionados: ["ch-extra-blanc-pro", "ch-extra-neut"]
+  },
+  {
+    id: "ch-extra-5000",
+    nombre: "Detergente Extra 5000 · polvo",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Detergente en polvo para lavanderías industriales, hospitalarias, hoteleras y gastronómicas. Muy eficaz en manchas grasas.",
+    caracteristicas: ["Alta eficacia en manchas grasas", "Para lavandería hotelera, hospitalaria y gastronómica"],
+    presentaciones: ["Bolsa 25 kg"],
+    imagen: "https://cahesa.com/uploads/1561709258310031.jpg",
+    ficha: "https://cahesa.com/uploads/1572355384242071.pdf",
+    relacionados: ["ch-extra-blanc-pro", "ch-extra-neut"]
+  },
+  {
+    id: "ch-extra-blanc-pro",
+    nombre: "Extra Blanc Pro · blanqueador clorado en polvo",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Blanqueador clorado en polvo que libera el cloro de forma controlada. Blanquea y desinfecta.",
+    caracteristicas: ["Liberación controlada de cloro", "Blanquea y desinfecta"],
+    presentaciones: ["Bolsa 10 kg"],
+    imagen: "https://cahesa.com/uploads/1561711057484505.jpg",
+    ficha: "https://cahesa.com/uploads/1572355886072450.pdf",
+    relacionados: ["ch-extra-5000", "ch-extra-neut"]
+  },
+  {
+    id: "ch-extra-neut",
+    nombre: "Extra Neut · neutralizante en polvo",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Evita el amarillamiento y el deterioro prematuro de las prendas, y reduce la carga contaminante de los efluentes.",
+    caracteristicas: ["Evita amarillamiento", "Prolonga la vida útil de la ropa", "Reduce el DQO de efluentes"],
+    presentaciones: ["Bolsa 10 kg"],
+    imagen: "https://cahesa.com/uploads/1561711224113314.jpg",
+    ficha: "https://cahesa.com/uploads/1572355921778274.pdf",
+    relacionados: ["ch-extra-5000", "ch-extra-blanc-pro"]
+  },
+  {
+    id: "ch-olav-10",
+    nombre: "Jabón Olav 10 · polvo",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Jabón de cebo de alta espuma, eficaz en manchas grasas sobre algodón y poliéster.",
+    caracteristicas: ["Jabón de cebo, alta espuma", "Para algodón y poliéster", "Eficaz en manchas grasas"],
+    presentaciones: ["Bolsa 25 kg"],
+    imagen: "https://cahesa.com/uploads/1572543611482638.jpg",
+    ficha: "https://cahesa.com/uploads/1572355801831826.pdf",
+    relacionados: ["ch-extra-blanc-pro", "ch-extra-neut"]
+  },
+  {
+    id: "ch-politex-zull",
+    nombre: "Politex Zull · detergente en polvo",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Detergente en polvo de alto poder de remoción de manchas.",
+    caracteristicas: ["Alto poder desmanchante"],
+    presentaciones: [],
+    imagen: "https://cahesa.com/uploads/1630617171036023.jpg",
+    relacionados: ["ch-extra-blanc-pro", "ch-extra-neut"]
+  },
+  {
+    id: "ch-orion-desmanchador",
+    nombre: "Orión desmanchador",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Desmanchador de uso general para textiles. Se aplica en seco sobre la mancha o durante el lavado.",
+    caracteristicas: ["Uso general", "En seco o en el lavado"],
+    presentaciones: ["Caja 4 x 5 L"],
+    imagen: "https://cahesa.com/uploads/1561082486234011.jpg",
+    ficha: "https://cahesa.com/uploads/1572104713948237.pdf",
+    relacionados: ["ch-orion-solver", "ch-orion-gel", "ch-pulverizador"]
+  },
+  {
+    id: "ch-orion-gel",
+    nombre: "Orión Gel · desmanchador en gel",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Desmanchador en gel de alto contenido activo, emulsionante de grasas, con terpenos de aceite de pino.",
+    caracteristicas: ["Alto contenido activo", "Emulsiona grasas", "Con terpenos de pino"],
+    presentaciones: ["Envase 2,5 kg", "Balde 10 kg"],
+    imagen: "https://cahesa.com/uploads/1572359215667003.png",
+    relacionados: ["ch-orion-desmanchador", "ch-orion-solver"]
+  },
+  {
+    id: "ch-orion-solver",
+    nombre: "Orión Solver · manchas oleosas",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Quita manchas de aceite, grasa, tinta, cosméticos y similares. Se usa puro sobre la mancha.",
+    caracteristicas: ["Grasa, aceite, tinta y maquillaje", "Se aplica puro"],
+    presentaciones: ["Caja 4 x 5 L"],
+    imagen: "https://cahesa.com/uploads/1561083348635024.jpg",
+    ficha: "https://cahesa.com/uploads/1572104879435909.pdf",
+    relacionados: ["ch-orion-desmanchador", "ch-pulverizador"]
+  },
+  {
+    id: "ch-quita-oxido",
+    nombre: "Quita Óxido",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Elimina manchas de óxido en ropa blanca: una gota sobre la mancha y enjuagar enseguida. No usar en seda.",
+    caracteristicas: ["Para ropa blanca", "Acción inmediata", "No apto para seda"],
+    presentaciones: ["Caja 4 x 5 L"],
+    imagen: "https://cahesa.com/uploads/1561083411965245.jpg",
+    ficha: "https://cahesa.com/uploads/1572105351188401.pdf",
+    relacionados: ["ch-recuperador-liquido"]
+  },
+  {
+    id: "ch-recuperador-polvo",
+    nombre: "Recuperador de ropa en polvo",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Recuperador para ropa blanca en polvo. Consultanos por su uso y dosificación.",
+    caracteristicas: [],
+    presentaciones: [],
+    imagen: "https://cahesa.com/uploads/1561083426735516.jpg",
+    relacionados: ["ch-recuperador-liquido", "ch-quita-oxido"]
+  },
+  {
+    id: "ch-recuperador-liquido",
+    nombre: "Recuperador de ropa líquido",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Blanquea y reduce manchas en ropa blanca, especialmente las de tierra con hierro.",
+    caracteristicas: ["Para ropa blanca", "Manchas de tierra con hierro"],
+    presentaciones: ["Caja 4 x 5 L"],
+    imagen: "https://cahesa.com/uploads/1561083458773153.jpg",
+    ficha: "https://cahesa.com/uploads/1572105450810366.pdf",
+    relacionados: ["ch-quita-oxido", "ch-recuperador-polvo"]
+  },
+  {
+    id: "ch-extra-soft",
+    nombre: "Extra Soft · suavizante",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["hoteleria", "lavanderia", "salud"],
+    descripcion: "Suavizante textil con antiestáticos y perfume, en formatos para lavadero propio.",
+    caracteristicas: ["Con antiestáticos", "Perfumado"],
+    presentaciones: ["Bidón 5 L", "Bidón 20 L", "Tambor 200 L"],
+    imagen: "https://cahesa.com/uploads/1561707502737819.jpg",
+    ficha: "https://cahesa.com/uploads/1572104594000391.pdf",
+    relacionados: ["ch-orion-liquido", "ch-perfumina-soft"]
+  },
+  {
+    id: "ch-orion-hogar",
+    nombre: "Orión Hogar · detergente líquido",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["hoteleria", "lavanderia", "salud"],
+    descripcion: "Detergente de baja espuma para prendas delicadas, de color y blancas.",
+    caracteristicas: ["Baja espuma", "Delicadas, color y blancas"],
+    presentaciones: ["Bidón 5 L"],
+    imagen: "https://cahesa.com/uploads/1801679193186780.jpg",
+    relacionados: ["ch-extra-soft", "ch-perfumina-soft"]
+  },
+  {
+    id: "ch-orion-liquido",
+    nombre: "Orión Líquido · detergente",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["hoteleria", "lavanderia", "salud"],
+    descripcion: "Detergente líquido de baja espuma para prendas delicadas, de color y blancas.",
+    caracteristicas: ["Baja espuma", "Delicadas, color y blancas"],
+    presentaciones: ["Bidón 5 L"],
+    imagen: "https://cahesa.com/uploads/1561079393103381.jpg",
+    ficha: "https://cahesa.com/uploads/1572104477045618.pdf",
+    relacionados: ["ch-extra-soft", "ch-perfumina-soft"]
+  },
+  {
+    id: "ch-orion-polvo",
+    nombre: "Orión Polvo · detergente",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["hoteleria", "lavanderia", "salud"],
+    descripcion: "Detergente en polvo de baja espuma para prendas delicadas, de color y blancas.",
+    caracteristicas: ["Baja espuma", "Delicadas, color y blancas"],
+    presentaciones: ["Bolsa 10 kg"],
+    imagen: "https://cahesa.com/uploads/1561711683481330.jpg",
+    ficha: "https://cahesa.com/uploads/1572104254453636.pdf",
+    relacionados: ["ch-extra-soft", "ch-perfumina-soft"]
+  },
+  {
+    id: "ch-perfumina-soft",
+    nombre: "Perfumina Soft · aromatizante textil",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["hoteleria", "lavanderia", "salud"],
+    descripcion: "Aromatizante para ropa blanca y blanquería: realza la fragancia del suavizante. Por su base alcohólica no humedece las prendas. Una o dos pulverizaciones sobre la prenda limpia.",
+    caracteristicas: ["Base alcohólica, no humedece", "Se usa puro con pulverizador", "Ideal para blanquería de habitaciones"],
+    presentaciones: ["Caja 4 x 5 L"],
+    imagen: "https://cahesa.com/uploads/1561707601308603.jpg",
+    ficha: "https://cahesa.com/uploads/1572107794545840.pdf",
+    relacionados: ["ch-pulverizador", "ch-extra-soft"]
+  },
+  {
+    id: "ch-pulverizador",
+    nombre: "Pulverizador profesional 1 L",
+    marca: "Cahesa",
+    categoria: "limpieza",
+    sectores: ["hoteleria", "lavanderia", "salud", "gastronomia", "oficinas", "industria"],
+    descripcion: "Envase de 1 litro resistente a químicos, con escala de dilución, espacio para rotular y gatillo profesional.",
+    caracteristicas: ["Resistente a químicos", "Escala de dilución", "Gatillo profesional"],
+    presentaciones: ["Envase 1 L"],
+    imagen: "https://cahesa.com/uploads/1801680437311320.jpg",
+    relacionados: ["ch-perfumina-soft", "ch-orion-solver"]
+  },
+  {
+    id: "ch-dositex",
+    nombre: "Dositex · dosificación automática",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Sistema automático que dosifica los productos Politex en cada lavarropas industrial, con software de reportes y control de costos. Lo instalamos en comodato con servicio técnico incluido.",
+    caracteristicas: ["Dosifica Politex según tipo de ropa y suciedad", "Software de reportes y control de costos", "En comodato, con servicio técnico"],
+    presentaciones: [],
+    imagen: "https://cahesa.com/uploads/1572356937233964.png",
+    ficha: "https://cahesa.com/uploads/1572356783623240.pdf",
+    relacionados: ["ch-politex-100", "ch-politex-110", "ch-politex-300", "ch-politex-extra-soft"]
+  },
+  {
+    id: "ch-dosificador-convencional",
+    nombre: "Dosificador para lavarropas convencionales",
+    marca: "Cahesa",
+    categoria: "lavanderia",
+    sectores: ["lavanderia", "hoteleria", "salud"],
+    descripcion: "Equipo de dosificación para máquinas convencionales. Consultanos para evaluar tu lavadero.",
+    caracteristicas: [],
+    presentaciones: [],
+    imagen: "https://cahesa.com/uploads/1561083508801951.jpg",
+    relacionados: ["ch-politex-110", "ch-politex-extra-soft"]
+  },
+  {
+    id: "ch-triox-frutal",
+    nombre: "Triox Frutal · jabón líquido para manos",
+    marca: "Cahesa",
+    categoria: "manos",
+    sectores: ["hoteleria", "oficinas", "gastronomia", "salud"],
+    descripcion: "Jabón líquido para manos de pH balanceado: limpia en profundidad, cuida la piel y se enjuaga fácil. Fragancia frutal.",
+    caracteristicas: ["pH balanceado", "Fácil enjuague", "Fragancia frutal"],
+    presentaciones: ["Bidón 5 L"],
+    imagen: "https://cahesa.com/uploads/1839076399725473.jpeg",
+    relacionados: ["ch-triox-manzana"]
+  },
+  {
+    id: "ch-triox-manzana",
+    nombre: "Triox Manzana · jabón líquido para manos",
+    marca: "Cahesa",
+    categoria: "manos",
+    sectores: ["hoteleria", "oficinas", "gastronomia", "salud"],
+    descripcion: "Jabón líquido para manos de pH balanceado: limpia en profundidad, cuida la piel y se enjuaga fácil. Fragancia manzana.",
+    caracteristicas: ["pH balanceado", "Fácil enjuague", "Fragancia manzana"],
+    presentaciones: ["Bidón 5 L"],
+    imagen: "https://cahesa.com/uploads/1839076373519296.jpeg",
+    relacionados: ["ch-triox-frutal"]
+  },
+  {
+    id: "ch-dilutores",
+    nombre: "Equipos dilutores",
+    marca: "Cahesa",
+    categoria: "limpieza",
+    sectores: ["hoteleria", "salud", "gastronomia", "oficinas", "industria"],
+    descripcion: "Sistema de dilución automática para preparar los productos de limpieza en la concentración justa. Consultanos para tu establecimiento.",
+    caracteristicas: [],
+    presentaciones: [],
+    imagen: "https://cahesa.com/uploads/1630614968663580.png",
+    relacionados: ["ch-pulverizador"]
+  },
   // ===== Good Cream · amenities hoteleros (línea completa de tienda.goodcream.com.ar) =====
   {
     id: "gc-kit-plisado-personalizado",
@@ -563,7 +957,7 @@ window.PRODUCTOS = [
     descripcion: "Toallas de papel que salen de a una para un secado higiénico.",
     presentaciones: ["Caja"],
     imagen: "",
-    relacionados: ["dispensador-toallas", "jabon-liquido-manos"]
+    relacionados: ["dispensador-toallas", "ch-triox-frutal"]
   },
   {
     id: "toalla-rollo",
@@ -616,7 +1010,7 @@ window.PRODUCTOS = [
     descripcion: "Dispensador de pared para jabón líquido o en espuma.",
     presentaciones: [],
     imagen: "",
-    relacionados: ["jabon-liquido-manos", "alcohol-gel"]
+    relacionados: ["ch-triox-frutal", "alcohol-gel"]
   },
   {
     id: "panos-wypall",
@@ -627,17 +1021,6 @@ window.PRODUCTOS = [
     descripcion: "Paños descartables para limpieza en industria y cocina.",
     presentaciones: ["Rollo", "Caja"],
     imagen: ""
-  },
-  {
-    id: "jabon-liquido-manos",
-    nombre: "Jabón líquido para manos",
-    marca: "",
-    categoria: "manos",
-    sectores: ["hoteleria", "gastronomia", "salud", "oficinas", "industria"],
-    descripcion: "Jabón líquido para recargar dispensadores.",
-    presentaciones: ["Bidón", "Cartucho"],
-    imagen: "",
-    relacionados: ["dispensador-jabon"]
   },
   {
     id: "alcohol-gel",
@@ -668,17 +1051,6 @@ window.PRODUCTOS = [
     descripcion: "Desinfectante para pisos y superficies.",
     presentaciones: ["Bidón"],
     imagen: ""
-  },
-  {
-    id: "detergente-lavanderia",
-    nombre: "Detergente para lavandería",
-    marca: "",
-    categoria: "limpieza",
-    sectores: ["lavanderia", "hoteleria", "salud"],
-    descripcion: "Detergente para lavado de ropa blanca y mantelería.",
-    presentaciones: ["Bidón"],
-    imagen: "",
-    relacionados: ["desinfectante"]
   },
   {
     id: "bolsas-residuos",
