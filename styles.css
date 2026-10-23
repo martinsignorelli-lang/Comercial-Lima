@@ -262,3 +262,5 @@ a { color: inherit; }
   background: var(--blanco); color: var(--verde); font-size: 20px; font-weight: 700; line-height: 1;
 }
 .combina-add.en-pedido, .combina-add:hover { background: var(--verde); color: #fff; }
+.btn-fds { background: #f3f4f3; color: var(--gris); }
+.btn-ficha + .btn-fds { margin-top: -4px; }

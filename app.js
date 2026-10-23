@@ -164,6 +164,9 @@
       (p.ficha ? '<a class="btn-ficha" href="' + esc(p.ficha) + '" target="_blank" rel="noopener">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 12v6m-3-3 3 3 3-3"/></svg>' +
         "Ficha técnica (PDF)</a>" : "") +
+      (p.fds ? '<a class="btn-ficha btn-fds" href="' + esc(p.fds) + '" target="_blank" rel="noopener">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="M12 8v5m0 3h.01"/></svg>' +
+        "Hoja de seguridad (PDF)</a>" : "") +
       '<h4>Categoría</h4><div class="etiquetas"><span class="etiqueta">' + esc(nombreCategoria[p.categoria] || "") + "</span></div>" +
       ((p.sectores || []).length ? '<h4>Ideal para</h4><div class="etiquetas">' + p.sectores.map(function (s) {
         return '<span class="etiqueta">' + esc(nombreSector[s] || s) + "</span>";
