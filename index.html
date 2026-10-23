@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo · Comercial Lima</title>
+  <meta name="description" content="Catálogo de productos de higiene institucional de Comercial Lima. Armá tu pedido y consultanos por WhatsApp.">
+  <meta name="theme-color" content="#008200">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="wrap header-in">
+      <a class="logo" href="./" aria-label="Comercial Lima">
+        <svg viewBox="0 0 1084.8 262.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="currentColor"><path d="M196,11.8h0c31.9,0,57.7,25.9,57.7,57.7h0c0,31.9-25.9,57.8-57.7,57.8h-57.8v-57.8c0-31.9,25.9-57.7,57.7-57.7Z"/><path d="M138.2,146.4h57.8c31.9,0,57.7,25.9,57.7,57.7h0c0,31.9-25.9,57.8-57.7,57.8h0c-31.9,0-57.7-25.9-57.7-57.7v-57.8h0Z"/><path d="M3.6,11.8h57.8c31.9,0,57.7,25.9,57.7,57.7h0c0,31.9-25.9,57.8-57.7,57.8h0c-31.9,0-57.7-25.9-57.7-57.7V11.8h0Z" transform="translate(122.7 139) rotate(-180)"/><path d="M61.4,146.4h0c31.9,0,57.7,25.9,57.7,57.7h0c0,31.9-25.9,57.8-57.7,57.8H3.6v-57.8c0-31.9,25.9-57.7,57.7-57.7Z" transform="translate(122.7 408.3) rotate(-180)"/><rect x="431.5" y="78.3" width="81.6" height="183.6"/><path d="M758.2,76.5h-8.2c-31.2,0-56.5,29.8-56.5,29.8,0,0-25.3-29.8-56.5-29.8h-8.2c-40.6,0-73.5,32.9-73.5,73.5h0v111.9h73.5v-97.9c0-7.7,6.3-14,14-14h0c7.7,0,14,6.3,14,14v97.9h73.5v-97.9c0-7.7,6.3-14,14-14h0c7.7,0,14,6.3,14,14v97.9h73.5v-111.9h0c0-40.6-32.9-73.5-73.5-73.5Z"/><path d="M376.2,168.3V11.8h-81.6v170c0,44.2,35.9,80.1,80.1,80.1h37.5v-73.7h-16.1c-11,0-19.9-8.9-19.9-19.9Z"/><ellipse cx="474.5" cy="32.6" rx="43.2" ry="32.6"/><path d="M969.8,76.5c-58.4,0-105.8,41.5-105.8,92.7s32.6,96.4,105.8,92.7c5.8-.3,11.5-.9,17-1.9v-63.3c-4.9,2.9-10.7,4.6-17,5-21.2,1.1-30.7-12.2-30.7-27.3s13.7-27.3,30.7-27.3,30.7,12.2,30.7,27.3h0v87.6h75v-92.7c0-51.2-47.3-92.7-105.8-92.7Z"/></g></svg>
+      </a>
+      <span class="header-tag">Higiene profesional</span>
+      <button class="btn-pedido" id="abrirPedido" type="button" aria-label="Ver mi pedido">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5h10l-1.5 9h-11L4 3H2"/><circle cx="8" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+        <span>Mi pedido</span>
+        <span class="badge" id="contador">0</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Catálogo de productos</p>
+      <h1>Todo para la higiene de tu empresa</h1>
+      <p class="hero-sub">Elegí los productos, armá tu pedido y mandanos la consulta por WhatsApp. Te respondemos con el presupuesto.</p>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="buscar" type="search" placeholder="Buscar producto o marca…" autocomplete="off" aria-label="Buscar producto o marca">
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap main">
+    <div class="filtros">
+      <div class="chips" id="categorias" role="tablist" aria-label="Categorías"></div>
+      <div class="selects">
+        <label>Sector
+          <select id="sector"><option value="">Todos</option></select>
+        </label>
+        <label>Marca
+          <select id="marca"><option value="">Todas</option></select>
+        </label>
+      </div>
+    </div>
+    <p class="resultado" id="resultado" aria-live="polite"></p>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-in">
+      <div>
+        <strong>Comercial Lima S.A.</strong>
+        <span>Deán Funes 1170, Salta</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://wa.me/543874681380" target="_blank" rel="noopener">WhatsApp +54 387 468 1380</a>
+        <a href="https://www.comerciallima.com.ar" target="_blank" rel="noopener">www.comerciallima.com.ar</a>
+        <a href="https://www.instagram.com/lima_higiene_profesional" target="_blank" rel="noopener">@lima_higiene_profesional</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Detalle de producto -->
+  <dialog class="modal" id="detalle" aria-labelledby="detalleNombre">
+    <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+    <div class="modal-body" id="detalleBody"></div>
+  </dialog>
+
+  <!-- Pedido -->
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="panel" id="panel" aria-labelledby="panelTitulo" aria-hidden="true">
+    <div class="panel-head">
+      <h2 id="panelTitulo">Mi pedido</h2>
+      <button class="cerrar" type="button" id="cerrarPedido" aria-label="Cerrar">×</button>
+    </div>
+    <div class="panel-items" id="items"></div>
+    <div class="panel-foot">
+      <label class="campo">Nombre o empresa (opcional)
+        <input id="cliente" type="text" placeholder="Ej.: Hotel Las Lomas">
+      </label>
+      <label class="campo">Comentarios (opcional)
+        <textarea id="comentario" rows="2" placeholder="Ej.: entrega en Cerrillos"></textarea>
+      </label>
+      <button class="btn-wa" id="enviar" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Pedir presupuesto por WhatsApp
+      </button>
+      <button class="btn-link" id="vaciar" type="button">Vaciar pedido</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="data/productos.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
